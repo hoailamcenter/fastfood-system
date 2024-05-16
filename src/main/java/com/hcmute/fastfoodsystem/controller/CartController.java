@@ -10,6 +10,7 @@ import com.hcmute.fastfoodsystem.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -28,9 +29,12 @@ public class CartController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/cart")
+    @GetMapping("/info")
     public String cart(Model model, HttpSession session) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "login";
+        }
         String username = authentication.getName();
         User user = userService.getUserByEmail(username);
         Cart cart = user.getCart();
@@ -45,8 +49,6 @@ public class CartController {
         model.addAttribute("title", "Cart");
         session.setAttribute("totalItems", cart.getTotalItems());
         return "cart";
-
-
     }
 
     @PostMapping("/add-to-cart")
@@ -56,6 +58,9 @@ public class CartController {
                                 Model model,
                                 HttpSession session) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "login";
+        }
         ProductDto productDto = productService.getById(id);
         String username = authentication.getName();
         Cart shoppingCart = cartService.addItemToCart(productDto, quantity, username);
@@ -76,7 +81,7 @@ public class CartController {
         Cart shoppingCart = cartService.updateCart(productDto, quantity, username);
         model.addAttribute("shoppingCart", shoppingCart);
         session.setAttribute("totalItems", shoppingCart.getTotalItems());
-        return "redirect:cart";
+        return "redirect:info";
 
     }
 
@@ -93,7 +98,7 @@ public class CartController {
             Cart shoppingCart = cartService.removeItemFromCart(productDto, username);
             model.addAttribute("shoppingCart", shoppingCart);
             session.setAttribute("totalItems", shoppingCart.getTotalItems());
-            return "redirect:cart";
+            return "redirect:info";
     }
 
 }

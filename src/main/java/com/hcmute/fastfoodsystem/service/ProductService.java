@@ -17,4 +17,7 @@ public interface ProductService {
     void deleteProductById(long id);
     List<Product> addAllProducts(List<Product> products);
     ProductDto getById(long id);
+    List<Product> searchProducts(String keyword);
+    List<Product> findProductsByPriceRange(int minPrice, int maxPrice);
+    List<Product> getRandomProducts(int numberOfProducts);
 }

@@ -14,5 +14,5 @@ public interface CategoryService {
     Category saveCategory(Category category);
     void deleteCategory(Category category);
     void deleteCategoryById(long id);
-    List<Category> addAllUsers(List<Category> categories);
+    List<Category> addAllCategories(List<Category> categories);
 }

@@ -42,6 +42,12 @@ public class User {
     @Column(name = "password", nullable = false, length = 64)
     private String password;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "address")
+    private String address;
+
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @NotNull
@@ -63,5 +69,6 @@ public class User {
     @ToString.Exclude
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Cart cart;
+
 
 }

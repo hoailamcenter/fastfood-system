@@ -50,7 +50,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> addAllUsers(List<Category> categories) {
+    public List<Category> addAllCategories(List<Category> categories) {
         categories.forEach(ele -> {
             if (ele.getId() != 0) {
                 ele.setId(0);

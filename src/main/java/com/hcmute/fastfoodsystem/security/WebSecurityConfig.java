@@ -62,17 +62,17 @@ public class WebSecurityConfig {
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
         http.csrf(AbstractHttpConfigurer::disable)
                 .formLogin(login ->
-                        login.loginPage("/login").permitAll()
+                        login.loginPage("/auth/login").permitAll()
                                 .usernameParameter("username")
                                 .passwordParameter("password")
                                 .loginProcessingUrl("/do-login")
-                                .defaultSuccessUrl("/products", true)
+                                .defaultSuccessUrl("/home", true)
                                 .permitAll())
                 .logout(logout ->
                         logout.invalidateHttpSession(true)
                                 .clearAuthentication(true)
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .logoutSuccessUrl("/login?logout")
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
+                                .logoutSuccessUrl("/auth/login?logout")
                                 .permitAll())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .authenticationManager(authenticationManager)

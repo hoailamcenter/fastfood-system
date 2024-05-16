@@ -50,11 +50,5 @@ public class Product {
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "product", orphanRemoval = true)
     private Set<CartItems> cartItems;
-    public void addCategory(Category category){
-        if (!category.getProducts().contains(this)){
-            category.getProducts().add(this);
-            this.setCategory(category);
-        }
-    }
 
 }

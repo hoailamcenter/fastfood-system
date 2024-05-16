@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="~{fragment::head}"></div>
+    <link th:href="@{/css/signupstyle.css}" rel="stylesheet" >
+</head>
+<body>
+<div th:replace="~{fragment::spinner}">
+</div>
+<!-- Spinner End -->
+<!-- Navbar start -->
+<div th:replace="~{fragment::nav-bar}">
+</div>
+<!-- Navbar End -->
+<!-- Modal Search Start -->
+<div th:replace="~{fragment::top-search}">
+</div>
+<div>
+    <form th:action = "@{/auth/do-register}" method="POST" th:object = "${registerDto}">
+        <h4 class="text-warning text-center pt-5">Registration</h4>
+        <div th:if = "${success}">
+            <p class = "alert alert-success" th:text = "${success}"></p>
+        </div>
+        <div th:if = "${error}">
+            <p class = "alert alert-danger" th:text = "${error}"></p>
+        </div>
+        <label>
+            <input type="email" class="input" placeholder="Email" name="email" th:field = "*{email}" required/>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+
+        <label>
+            <input type="text" class="input" placeholder="First Name" name="firstName" th:field = "*{firstName}" required/>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+        <label>
+            <input type="text" class="input" placeholder="Last Name" name="lastName" th:field = "*{lastName}" required/>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+        <label>
+            <input type="number" class="input" placeholder="Phone Number" name="phoneNumber" th:field = "*{phoneNumber}" required/>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+        <label>
+            <input type="text" class="input" placeholder="Address" name="address" th:field = "*{address}" required/>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+        <label>
+            <input type="password" class="input" placeholder="Password" name="password" th:field = "*{password}" required/>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+
+        <label>
+            <input type="password" class="input" placeholder="Verify password" name="confirm" th:field = "*{confirmPassword}" required/>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+        <div>
+            <p>Do You Already Have An Account ? <a th:href = "@{/auth/login}"> Log in now </a></p>
+        </div>
+        <button type="submit">submit</button>
+    </form>
+</div>
+<!-- Footer Start -->
+<footer th:replace="~{fragment::footer}">
+</footer>
+<!-- Footer End -->
+<!-- Copyright Start -->
+<div th:replace="~{fragment::copy-right}">
+</div>
+<!-- Copyright End -->
+<!-- JavaScript Libraries -->
+<div th:replace="~{fragment::script}">
+</div>
+</body>
+</html>

@@ -7,6 +7,7 @@ import com.hcmute.fastfoodsystem.exceptions.CartItemNotExistException;
 import com.hcmute.fastfoodsystem.model.*;
 import com.hcmute.fastfoodsystem.repository.CartItemRepository;
 import com.hcmute.fastfoodsystem.repository.CartRepository;
+import com.hcmute.fastfoodsystem.repository.ProductRepository;
 import com.hcmute.fastfoodsystem.repository.UserRepository;
 import com.hcmute.fastfoodsystem.service.CartService;
 import com.hcmute.fastfoodsystem.service.CategoryService;
@@ -24,6 +25,9 @@ public class CartServiceImpl implements CartService {
     CartRepository cartRepository;
 
     @Autowired
+    ProductRepository productRepository;
+
+    @Autowired
     UserRepository userRepository;
 
     @Autowired
@@ -38,16 +42,13 @@ public class CartServiceImpl implements CartService {
     public Cart addItemToCart(ProductDto productDto, int quantity, String username) {
         User user = userRepository.findByEmail(username);
         Cart shoppingCart = user.getCart();
-
         if (shoppingCart == null) {
             shoppingCart = new Cart();
         }
         Set<CartItems> cartItemList = shoppingCart.getCartItems();
         CartItems cartItem = find(cartItemList, productDto.getId());
-        Product product = transfer(productDto);
-
+        Product product = productRepository.findById(productDto.getId()).orElseThrow();
         double unitPrice = productDto.getPrice();
-
         int itemQuantity = 0;
         if (cartItemList == null) {
             cartItemList = new HashSet<>();

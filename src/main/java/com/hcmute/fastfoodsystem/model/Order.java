@@ -2,7 +2,6 @@ package com.hcmute.fastfoodsystem.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.hcmute.fastfoodsystem.dto.PlaceOrderDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -26,19 +25,34 @@ public class Order {
     @Column(name = "order_date")
     private Date orderDate;
 
+    @Column(name = "delivery_date")
+    private Date deliveryDate;
+
+    @Column(name = "order_status")
+    private String orderStatus;
+
     @NotNull
     @Column(name = "total_amount")
     private double totalAmount;
+
+    @NotNull
+    @Column(name = "tax")
+    private double tax;
+
+    @Column(name = "payment_method")
+    private String paymentMethod;
+
+    @Column(name = "is_accept")
+    private boolean isAccept;
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @NotNull
     @JsonBackReference
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "session_id")
-    private String sessionId;
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
@@ -46,10 +60,4 @@ public class Order {
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private List<OrderDetail> orderDetails = new ArrayList<>();
 
-    public Order(PlaceOrderDto orderDto, User user, String sessionId){
-        this.user = user;
-        this.orderDate = new Date();
-        this.totalAmount = orderDto.getTotalPrice();
-        this.sessionId = sessionId;
-    }
 }

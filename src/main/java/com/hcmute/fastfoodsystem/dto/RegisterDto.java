@@ -11,7 +11,7 @@ import java.util.Set;
 @Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@NoArgsConstructor
 public class RegisterDto {
 
     @NotBlank(message = "first name is required")
@@ -23,9 +23,16 @@ public class RegisterDto {
     @Email(message = "email must follow the standard conventions")
     private String email;
 
+    @Size(min = 10, max = 15, message = "Phone number contains 10-15 characters")
+    private String phoneNumber;
+
+    private String address;
+
     @NotBlank(message = "Password is mandatory")
     @Size(min = 6, max = 40)
     private String password;
+
+    private String confirmPassword;
 
     private Set<String> role;
 

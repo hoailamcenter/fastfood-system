@@ -37,29 +37,27 @@ public class FastfoodSystemApplication {
 	}
 
 	private void preloadData(RoleService roleService, UserService userService, ProductService productService, CategoryService categoryService, PasswordEncoder encoder) {
-		List<Role> roles = roleService.getAllRoles();
-		System.out.println(roles);
-		List<User> users = FileUtil.getObjectsFromFile("preloadData/user.json", User[].class);
-		if(users != null){
-			users = users.stream().peek(user -> user.setPassword(encoder.encode(user.getPassword()))).toList();
-			System.out.println(users);
-		}
-		for (User user : users) {
-			user.setRoles(new HashSet<>(roles));
-			System.out.println(user);
-		}
+//		List<Role> roles = roleService.getAllRoles();
+//
+//		List<User> users = FileUtil.getObjectsFromFile("preloadData/user.json", User[].class);
+//		if(users != null){
+//			users = users.stream().peek(user -> user.setPassword(encoder.encode(user.getPassword()))).toList();
+//
+//		}
+//		for (User user : users) {
+//			user.setRoles(new HashSet<>(roles));
+//
+//		}
 		List<Product> products = FileUtil.getObjectsFromFile("preloadData/product.json", Product[].class);
 		List<Category> categories = FileUtil.getObjectsFromFile("preloadData/category.json", Category[].class);
-//		List<Role> roles = FileUtil.getObjectsFromFile("preloadData/role.json", Role[].class);
 
 		for (int i = 0; i < products.size(); i++){
 			categories.get(i % categories.size()).addProduct(products.get(i));
 		}
 
 
-//		List<Role> persistedRoles = roleService.addAllRoles(roles);
-		List<User> persistedUsers = userService.addAllUsers(users);
-		List<Category> persistedCategories = categoryService.addAllUsers(categories);
+		//List<User> persistedUsers = userService.addAllUsers(users);
+		//List<Category> persistedCategories = categoryService.addAllCategories(categories);
 		List<Product> persistedProducts = productService.addAllProducts(products);
 
 

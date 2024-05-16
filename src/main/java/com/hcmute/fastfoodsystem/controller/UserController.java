@@ -1,17 +1,18 @@
 package com.hcmute.fastfoodsystem.controller;
 
-import com.hcmute.fastfoodsystem.dto.UserDto;
 import com.hcmute.fastfoodsystem.model.User;
 import com.hcmute.fastfoodsystem.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
@@ -22,42 +23,66 @@ public class UserController {
 
     @Autowired
     PasswordEncoder encoder;
-    @GetMapping()
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<List<UserDto>> getAllUsers() {
-        return ResponseEntity.ok(UserDto.of(userService.getAllUsers()));
-    }
 
-    @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<UserDto> getUserById(@PathVariable long id){
-        String message = "User not found";
-        return ResponseEntity.ok(UserDto.of(userService.getUserByIdOrElseThrow(id, message)));
+    @GetMapping("/change-password")
+    public String changePassword(Model model) {
+        model.addAttribute("title", "Change password");
+        model.addAttribute("page", "Change password");
+        return "changepassword";
     }
-
-    @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> updateUserById(@PathVariable("id") long id, @RequestBody UserDto user){
-        Optional<User> existedUser = userService.getUserById(id);
-        if (existedUser.isPresent()){
-            User updatedUser = existedUser.get();
-            updatedUser.setFirstName(user.getFirstName());
-            updatedUser.setLastName(user.getLastName());
-            updatedUser.setEmail(user.getEmail());
-            updatedUser.setPassword(encoder.encode(user.getPassword()));
-            return new ResponseEntity<>(userService.saveUser(updatedUser), HttpStatus.OK);
+    @PostMapping("/change-password")
+    public String changePass(@RequestParam("oldPassword") String oldPassword,
+                             @RequestParam("newPassword") String newPassword,
+                             @RequestParam("repeatNewPassword") String repeatPassword,
+                             RedirectAttributes attributes,
+                             Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "login";
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            String username = authentication.getName();
+            User customer = userService.getUserByEmail(username);
+            if (encoder.matches(oldPassword, customer.getPassword())
+                    && !encoder.matches(newPassword, oldPassword)
+                    && !encoder.matches(newPassword, customer.getPassword())
+                    && repeatPassword.equals(newPassword) && newPassword.length() >= 5) {
+                customer.setPassword(encoder.encode(newPassword));
+                userService.changePassword(customer);
+                attributes.addFlashAttribute("success", "Your password has been changed successfully!");
+                return "login";
+            } else {
+                model.addAttribute("message", "Your password is wrong");
+                return "changepassword";
+            }
         }
     }
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id){
-        try {
-            userService.deleteUserById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    @GetMapping("/profile")
+    public String profile(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "login";
         }
+        String username = authentication.getName();
+        User customer = userService.getUserByEmail(username);
+        model.addAttribute("customer", customer);
+        model.addAttribute("title", "Profile");
+        model.addAttribute("page", "Profile");
+        return "profile";
+
+    }
+    @PostMapping("/update-profile")
+    public String updateProfile(@Valid @ModelAttribute("customer") User user,
+                                RedirectAttributes attributes,
+                                Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "login";
+        }
+        String username = authentication.getName();
+        userService.update(user);
+        User customerUpdate = userService.getUserByEmail(username);
+        attributes.addFlashAttribute("success", "Update successfully!");
+        model.addAttribute("customer", customerUpdate);
+        return "redirect:/profile";
     }
 }

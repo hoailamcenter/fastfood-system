@@ -13,7 +13,9 @@ public interface UserService {
     void deleteUser(User user);
     void deleteUserById(long id);
     List<User> addAllUsers(List<User> users);
-
     User getUserByEmail(String email);
     Optional<User> getUserByPassword(String password);
+    public User changePassword(User user);
+    public User update(User dto);
+
 }

@@ -1,18 +1,22 @@
 [
   {
     "id":1,
-    "category":"Drywall & Acoustical (MOB)"
+    "category":"RICE-BURGER-PASTA"
   },
   {
-    "id":2,"category":"Masonry"
+    "id":2,
+    "category":"FRIED & ROASTED"
   },
   {
-    "id":3,"category":"Termite Control"
+    "id":3,
+    "category":"SNACK"
   },
   {
-    "id":4,"category":"Soft Flooring and Base"
+    "id":4,
+    "category":"DESSERT & DRINKS"
   },
   {
-    "id":5,"category":"Soft Flooring and Base"
+    "id":5,
+    "category":"COMBO"
   }
 ]

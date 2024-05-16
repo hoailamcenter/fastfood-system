@@ -1,72 +1,121 @@
 [
   {
-    "id":1,
-    "productName":"Shark - Loin",
-    "image":"http://dummyimage.com/115x100.png/cc0000/ffffff",
-    "price":100.00,
-    "quantity":74
+    "id": 1,
+    "productName": "Tenders",
+    "image": "/img/3-TENDERS.jpg",
+    "price": 110.00,
+    "quantity": 74
   },
   {
-    "id":2,
-    "productName":"Beans - Black Bean, Preserved",
-    "image":"http://dummyimage.com/162x100.png/dddddd/000000",
-    "price":100.00,
-    "quantity":23
+    "id": 2,
+    "productName": "3_Nuggests",
+    "image": "/img/3_Nuggests.jpg",
+    "price": 80.00,
+    "quantity": 23
   },
   {
-    "id":3,
-    "productName":"Capers - Ox Eye Daisy",
-    "image":"http://dummyimage.com/248x100.png/ff4444/ffffff",
-    "price":100.00,
-    "quantity":97
+    "id": 3,
+    "productName": "Burger-Shrimp",
+    "image": "/img/Burger-Shrimp.jpg",
+    "price": 70.00,
+    "quantity": 97
   },
   {
-    "id":4,
-    "productName":"Beef - Tongue, Fresh",
-    "image":"http://dummyimage.com/104x100.png/dddddd/000000",
-    "price":100.00,
-    "quantity":9
+    "id": 4,
+    "productName": "Burger-Zinger",
+    "image": "/img/Burger-Zinger.jpg",
+    "price": 90.00,
+    "quantity": 9
   },
   {
-    "id":5,
-    "productName":"Mix - Cocktail Strawberry Daiquiri",
-    "image":"http://dummyimage.com/232x100.png/dddddd/000000",
-    "price":100.00,
-    "quantity":68
+    "id": 5,
+    "productName": "Spaghetti",
+    "image": "/img/MI-Y-GA-RAN.jpg",
+    "price": 85.00,
+    "quantity": 68
   },
   {
-    "id":6,
-    "productName":"Beer - Blue",
-    "image":"http://dummyimage.com/221x100.png/cc0000/ffffff",
-    "price":100.00,
-    "quantity":44
+    "id": 6,
+    "productName": "Zinger Spaghetti",
+    "image": "/img/MI-Y-GA-ZINGER.jpg",
+    "price": 120.00,
+    "quantity": 44
   },
   {
-    "id":7,
-    "productName":"Foie Gras",
-    "image":"http://dummyimage.com/181x100.png/cc0000/ffffff",
-    "price":100.00,
-    "quantity":85
+    "id": 7,
+    "productName": "POP",
+    "image": "/img/POP-R.jpg",
+    "price": 60.00,
+    "quantity": 85
   },
   {
-    "id":8,
-    "productName":"Pepper - Gypsy Pepper",
-    "image":"http://dummyimage.com/114x100.png/ff4444/ffffff",
-    "price":100.00,
-    "quantity":85
+    "id": 8,
+    "productName": "Salad",
+    "image": "/img/SALAD-HAT.jpg",
+    "price": 50.00,
+    "quantity": 85
   },
   {
-    "id":9,
-    "productName":"Quail - Whole, Bone - In",
-    "image":"http://dummyimage.com/205x100.png/cc0000/ffffff",
-    "price":100.00,
-    "quantity":28
+    "id": 9,
+    "productName": "Chicken Nuggets Salad",
+    "image": "/img/SALAD-HAT-GA-VIEN.jpg",
+    "price": 75.00,
+    "quantity": 28
   },
   {
-    "id":10,
-    "productName":"Mountain Dew",
-    "image":"http://dummyimage.com/125x100.png/cc0000/ffffff",
-    "price":100.00,
-    "quantity":78
+    "id": 10,
+    "productName": "Soup",
+    "image": "/img/Soup-Rong-Bien.jpg",
+    "price": 90.00,
+    "quantity": 78
+  },
+  {
+    "id": 11,
+    "productName": "PastePop",
+    "image": "/img/D-CBO-PastaPop.jpg",
+    "price": 95.00,
+    "quantity": 28
+  },
+  {
+    "id": 12,
+    "productName": "Nan",
+    "image": "/img/COMBO-A-Nan.jpg",
+    "price": 84.00,
+    "quantity": 78
+  },
+  {
+    "id": 13,
+    "productName": "Flava",
+    "image": "/img/D-CBO-B-Flava.jpg",
+    "price": 72.00,
+    "quantity": 28
+  },
+  {
+    "id": 14,
+    "productName": "Rice-Flava",
+    "image": "/img/D-CBO-Rice-Flava.jpg",
+    "price": 55.00,
+    "quantity": 78
+  },
+  {
+    "id": 15,
+    "productName": "Rice-Flava",
+    "image": "/img/D-CBO-Rice-Flava.jpg",
+    "price": 55.00,
+    "quantity": 78
+  },
+  {
+    "id": 16,
+    "productName": "Rice-Flava",
+    "image": "/img/D-CBO-Rice-Flava.jpg",
+    "price": 55.00,
+    "quantity": 78
+  },
+  {
+    "id": 1,
+    "productName": "Rice-Flava",
+    "image": "/img/D-CBO-Rice-Flava.jpg",
+    "price": 55.00,
+    "quantity": 78
   }
-  ]
+]
