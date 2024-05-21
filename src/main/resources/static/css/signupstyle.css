@@ -1,7 +1,10 @@
 body {
   background: #FFFFFF;
-}
 
+}
+.wrapper {
+    margin: 150px auto;
+}
 form {
   width: 30%;
   margin: 60px auto;

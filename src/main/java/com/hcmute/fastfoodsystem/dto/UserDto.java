@@ -32,6 +32,10 @@ public class UserDto {
     @NotBlank(message = "role is required")
     private String role;
 
+    private String phoneNumber;
+
+    private String address;
+
     public static UserDto of(@NotNull User user) {
         String roles = user.getRoles().stream()
                 .map(role -> role.getName().toString())

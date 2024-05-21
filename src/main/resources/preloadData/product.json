@@ -24,14 +24,14 @@
     "id": 4,
     "productName": "Burger-Zinger",
     "image": "/img/Burger-Zinger.jpg",
-    "price": 90.00,
+    "price": 190.00,
     "quantity": 9
   },
   {
     "id": 5,
     "productName": "Spaghetti",
     "image": "/img/MI-Y-GA-RAN.jpg",
-    "price": 85.00,
+    "price": 185.00,
     "quantity": 68
   },
   {
@@ -45,77 +45,56 @@
     "id": 7,
     "productName": "POP",
     "image": "/img/POP-R.jpg",
-    "price": 60.00,
+    "price": 160.00,
     "quantity": 85
   },
   {
     "id": 8,
     "productName": "Salad",
     "image": "/img/SALAD-HAT.jpg",
-    "price": 50.00,
+    "price": 150.00,
     "quantity": 85
   },
   {
     "id": 9,
     "productName": "Chicken Nuggets Salad",
     "image": "/img/SALAD-HAT-GA-VIEN.jpg",
-    "price": 75.00,
+    "price": 175.00,
     "quantity": 28
   },
   {
     "id": 10,
     "productName": "Soup",
     "image": "/img/Soup-Rong-Bien.jpg",
-    "price": 90.00,
+    "price": 100.00,
     "quantity": 78
   },
   {
     "id": 11,
     "productName": "PastePop",
     "image": "/img/D-CBO-PastaPop.jpg",
-    "price": 95.00,
+    "price": 195.00,
     "quantity": 28
   },
   {
     "id": 12,
     "productName": "Nan",
     "image": "/img/COMBO-A-Nan.jpg",
-    "price": 84.00,
+    "price": 184.00,
     "quantity": 78
   },
   {
     "id": 13,
     "productName": "Flava",
     "image": "/img/D-CBO-B-Flava.jpg",
-    "price": 72.00,
+    "price": 172.00,
     "quantity": 28
   },
   {
     "id": 14,
     "productName": "Rice-Flava",
     "image": "/img/D-CBO-Rice-Flava.jpg",
-    "price": 55.00,
-    "quantity": 78
-  },
-  {
-    "id": 15,
-    "productName": "Rice-Flava",
-    "image": "/img/D-CBO-Rice-Flava.jpg",
-    "price": 55.00,
-    "quantity": 78
-  },
-  {
-    "id": 16,
-    "productName": "Rice-Flava",
-    "image": "/img/D-CBO-Rice-Flava.jpg",
-    "price": 55.00,
-    "quantity": 78
-  },
-  {
-    "id": 1,
-    "productName": "Rice-Flava",
-    "image": "/img/D-CBO-Rice-Flava.jpg",
-    "price": 55.00,
+    "price": 155.00,
     "quantity": 78
   }
 ]

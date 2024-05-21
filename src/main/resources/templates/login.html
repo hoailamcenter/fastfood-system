@@ -16,7 +16,8 @@
     <!-- Modal Search Start -->
     <div th:replace="~{fragment::top-search}">
     </div>
-        <div class="wrapper">
+    <section>
+        <div class="wrapper" >
             <div class="logo">
                 <img th:src="@{/img/logo.jpg}" alt="">
             </div>
@@ -40,9 +41,10 @@
                 <button class="btn mt-3" type="submit">Login</button>
             </form>
             <div class="text-center fs-6">
-                <p>Do You Already Have An Account ? <a th:href="@{/auth/register}">Sign up now  </a></p>
+                <p>Do You Already Have An Account ? <a th:href="@{/auth/register}">Sign up now </a></p>
             </div>
         </div>
+    </section>
     <!-- Footer Start -->
     <footer th:replace="~{fragment::footer}">
     </footer>

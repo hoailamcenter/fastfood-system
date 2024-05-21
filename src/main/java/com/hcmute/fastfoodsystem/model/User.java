@@ -38,7 +38,6 @@ public class User {
     @Column(name = "email", unique = true, length = 45)
     private String email;
 
-    @NotBlank(message = "password is mandatory")
     @Column(name = "password", nullable = false, length = 64)
     private String password;
 

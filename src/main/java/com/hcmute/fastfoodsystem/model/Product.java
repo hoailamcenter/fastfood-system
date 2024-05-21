@@ -38,7 +38,6 @@ public class Product {
     @ManyToOne
     private Category category;
 
-
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @NotNull

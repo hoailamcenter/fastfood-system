@@ -37,29 +37,29 @@
                             <thead>
                             <tr>
                                 <th class="order-date">Order Date</th>
-                                <th>Delivery Date</th>
+                                <th>Tax</th>
                                 <th class="price-pr">Order Status</th>
                                 <th class="quantity-box" >Total Price</th>
                                 <th class="total-pr">Payment Method</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="order : ${orders}">
-                                <td class="order-date">
+                            <tr th:each="order : ${orders}" >
+                                <td class="order-date" style="color: black">
                                     <span><b>[(${order.orderDate})]</b></span>
                                 </td>
-                                <td class="name-pr">
-                                    <a th:if = "${order.isAccept != false}" >
-                                        [(${order.deliveryDate})]
-                                    </a>
-                                    <a th:if = "${order.isAccept == false}"><p>5 day left</p> </a>
+                                <td class="name-pr" style="color: black">
+                                    <span>[(${order.tax})]</span>
                                 </td>
-                                <td class="price-pr">
-                                    <p th:text="${order.orderStatus}"></p>
+                                <td class="price-pr" style="color: black">
+                                    <span>[(${order.orderStatus})]</span>
                                 </td>
-                                <td class="quantity-box" th:text="${order.totalAmount}"> </td>
+                                <td class="quantity-box" style="color: black">
+                                    <span>[(${order.totalAmount + 2})]</span>
+                                </td>
                                 <td class="total-pr" style="color: black">
                                     <span>[(${order.paymentMethod})]</span>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

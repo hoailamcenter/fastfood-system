@@ -69,7 +69,6 @@ public class CartController {
         return "redirect:" + request.getHeader("Referer");
     }
 
-
     @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=update")
     public String updateCart(@RequestParam("id") Long id,
                              @RequestParam("quantity") int quantity,
@@ -82,7 +81,6 @@ public class CartController {
         model.addAttribute("shoppingCart", shoppingCart);
         session.setAttribute("totalItems", shoppingCart.getTotalItems());
         return "redirect:info";
-
     }
 
     @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=delete")
@@ -91,7 +89,6 @@ public class CartController {
                              HttpSession session
     )
     {
-
             ProductDto productDto = productService.getById(id);
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();

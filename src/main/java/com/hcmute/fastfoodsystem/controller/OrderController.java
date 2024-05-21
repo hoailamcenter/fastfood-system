@@ -72,7 +72,8 @@ public class OrderController {
     }
     @RequestMapping(value = "/add-order", method = {RequestMethod.POST})
     public String createOrder(Model model,
-                              HttpSession session) {
+                              HttpSession session,
+                              @RequestParam(value = "paymentMethod", required = false, defaultValue = "Cash On Delivery") String payment) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
             return "login";
@@ -80,7 +81,7 @@ public class OrderController {
             String username = authentication.getName();
             User customer = userService.getUserByEmail(username);
             Cart cart = customer.getCart();
-            Order order = orderService.save(cart);
+            Order order = orderService.save(cart, payment);
             session.removeAttribute("totalItems");
             model.addAttribute("order", order);
             model.addAttribute("title", "Order");

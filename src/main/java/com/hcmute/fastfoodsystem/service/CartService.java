@@ -11,19 +11,6 @@ public interface CartService {
 
     Cart removeItemFromCart(ProductDto productDto, String username);
 
-    CartDto addItemToCartSession(CartDto cartDto, ProductDto productDto, int quantity);
-
-    CartDto updateCartSession(CartDto cartDto, ProductDto productDto, int quantity);
-
-    CartDto removeItemFromCartSession(CartDto cartDto, ProductDto productDto, int quantity);
-
-    Cart combineCart(CartDto cartDto, Cart cart);
-
-
     void deleteCartById(Long id);
-
-    Cart getCart(String username);
-
-    Cart saveCart(Cart cart);
 
 }

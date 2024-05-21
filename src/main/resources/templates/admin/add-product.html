@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Add Product</title>
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:400,700"
+  />
+  <link rel="stylesheet" href="../../static/jquery-ui-datepicker/jquery-ui.min.css" type="text/css" />
+  <link th:href="@{/admin-css/admin-fontawesome.min.css}" rel="stylesheet"/>
+  <link th:href="@{/admin-css/admin-bootstrap.min.css}" rel="stylesheet"/>
+  <link th:href="@{/admin-css/templatemo-style.css}" rel="stylesheet"/>
+
+  <style>
+    .tm-edit-product-row {
+      display: flex; /* Enable flexbox for alignment */
+    }
+
+    .tm-edit-product-row > div {
+      flex: 1; /* Allow child elements to share space equally */
+    }
+
+    .tm-product-img-dummy {
+      width: 330px; /* Adjust the width as needed */
+      height: 330px; /* Adjust the height as needed */
+      border: 2px dashed #ccc; /* Add a dashed border */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #imagePreview img {
+      width: 100%;
+      height: auto;
+      object-fit: cover; /* Maintain aspect ratio and cover the container */
+    }
+  </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-xl">
+  <div class="container h-100">
+    <a class="navbar-brand" th:href="@{/admin/dashboard}" >
+      <h1 class="tm-site-title mb-0">Admin</h1>
+    </a>
+    <button
+            class="navbar-toggler ml-auto mr-0"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars tm-nav-icon"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto h-100">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/admin/dashboard}" >
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="reportsDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+          >
+            <i class="far fa-file-alt"></i>
+            <span> Reports <i class="fas fa-angle-down"></i> </span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="reportsDropdown">
+            <a class="dropdown-item" href="#">Daily Report</a>
+            <a class="dropdown-item" href="#">Weekly Report</a>
+            <a class="dropdown-item" href="#">Yearly Report</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/admin/list-products}">
+            <i class="fas fa-shopping-cart"></i>
+            Products
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/admin/users}">
+            <i class="far fa-user"></i>
+            Accounts
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="settingsDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+          >
+            <i class="fas fa-cog"></i>
+            <span> Settings <i class="fas fa-angle-down"></i> </span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="settingsDropdown">
+            <a class="dropdown-item" href="#">Profile</a>
+            <a class="dropdown-item" href="#">Billing</a>
+            <a class="dropdown-item" href="#">Customize</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container tm-mt-big tm-mb-big">
+<div class="row tm-edit-product-row">
+  <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+    <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="tm-block-title d-inline-block">Add Product</h2>
+        </div>
+      </div>
+      <div class="row tm-edit-product-row">
+        <form th:action="@{/admin/add-product}" th:object="${productDto}" method="post" enctype="multipart/form-data" class="row g-3">
+          <div class="col-lg-6">
+            <div class="row-lg-6 mb-3">
+              <label for="productName">Product Name</label>
+              <input id="productName" name="productName" th:field="*{productName}" type="text" class="form-control validate" required/>
+            </div>
+            <div class="row-lg-6 mb-3">
+              <label for="price">Price</label>
+              <input id="price" name="price" th:field="*{price}" type="text" class="form-control validate" required/>
+            </div>
+            <div class="row-lg-6 mb-3">
+              <label for="category">Category</label>
+              <select class="custom-select tm-select-accounts" id="category" th:field="*{category}">
+                <option value="">Select category</option>
+                <option th:each="category : ${categories}" th:value="${category.category}" th:text="${category.category}"></option>
+              </select>
+            </div>
+            <div class="row-lg-6 mb-3">
+              <label for="quantity">Quantity</label>
+              <input id="quantity" name="quantity" th:field="*{quantity}" type="text" class="form-control validate" required/>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row-lg-6 mb-3">
+              <div class="tm-product-img-dummy mx-auto" id="imagePreview">
+                <i class="fas fa-cloud-upload-alt tm-upload-icon"
+                   onclick="document.getElementById('fileInput').click();"></i>
+              </div>
+              <div class="custom-file mt-3 mb-3">
+                <input id="fileInput" name="imageProduct" type="file" style="display:none;" onchange="previewImage(this);"/>
+                <input type="button" class="btn btn-primary btn-block mx-auto"
+                       value="UPLOAD PRODUCT IMAGE"
+                       onclick="document.getElementById('fileInput').click();"/>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block text-uppercase">Add Product Now</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script th:src="@{/admin-js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/admin-js/bootstrap.min.js}"></script>
+<script src="../../static/jquery-ui-datepicker/jquery-ui.min.js"></script>
+<script>
+  $(function() {
+    $("#expire_date").datepicker();
+  });
+</script>
+<script>
+  function previewImage(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#imagePreview').html('<img src="' + e.target.result + '" style="width:300px; height: 300px;">');
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>
+</body>
+</html>

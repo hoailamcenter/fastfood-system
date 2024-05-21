@@ -14,5 +14,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("select p from Product p where p.productName like %?1%")
     List<Product> searchProducts(String keyword);
     List<Product> findByPriceBetween(int minPrice, int maxPrice);
-
+    List<Product> findTop6ByOrderByQuantityAsc();
+    List<Product> findTop4ByOrderByPriceAsc();
 }

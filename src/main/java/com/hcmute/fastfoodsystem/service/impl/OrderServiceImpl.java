@@ -27,15 +27,15 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public Order save(Cart shoppingCart) {
+    public Order save(Cart shoppingCart, String payment) {
         Order order = new Order();
         order.setOrderDate(new Date());
         order.setUser(shoppingCart.getUser());
         order.setTax(2);
         order.setTotalAmount(shoppingCart.getTotalPrice());
         order.setAccept(false);
-        order.setPaymentMethod("Cash");
-        order.setOrderStatus("Pending");
+        order.setPaymentMethod(payment);
+        order.setOrderStatus("Delivery");
         Order savedOrder = orderRepository.save(order);
         List<OrderDetail> orderDetailList = new ArrayList<>();
         for (CartItems item : shoppingCart.getCartItems()) {

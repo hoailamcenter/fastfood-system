@@ -1,5 +1,6 @@
 package com.hcmute.fastfoodsystem.service;
 
+import com.hcmute.fastfoodsystem.model.ERole;
 import com.hcmute.fastfoodsystem.model.User;
 
 import java.util.List;
@@ -17,5 +18,7 @@ public interface UserService {
     Optional<User> getUserByPassword(String password);
     public User changePassword(User user);
     public User update(User dto);
+    List<User> getAllUsersByRole(ERole role);
 
+    void updateUser(User userToUpdate);
 }

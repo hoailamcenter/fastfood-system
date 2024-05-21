@@ -15,9 +15,10 @@
 <!-- Modal Search Start -->
 <div th:replace="~{fragment::top-search}">
 </div>
-<div>
+<section>
+<div class="wrapper">
     <form th:action = "@{/auth/do-register}" method="POST" th:object = "${registerDto}">
-        <h4 class="text-warning text-center pt-5">Registration</h4>
+        <h4 class="text-center pt-5">Registration</h4>
         <div th:if = "${success}">
             <p class = "alert alert-success" th:text = "${success}"></p>
         </div>
@@ -74,6 +75,7 @@
         <button type="submit">submit</button>
     </form>
 </div>
+</section>
 <!-- Footer Start -->
 <footer th:replace="~{fragment::footer}">
 </footer>

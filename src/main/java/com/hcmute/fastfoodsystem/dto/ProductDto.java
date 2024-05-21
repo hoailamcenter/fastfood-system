@@ -44,4 +44,12 @@ public class ProductDto {
                 .quantity(product.getQuantity())
                 .category(product.getCategory().getCategory()).build();
     }
+    public ProductDto(Product product) {
+        this.id = product.getId();
+        this.productName = product.getProductName();
+        this.image = product.getImage();
+        this.price = product.getPrice();
+        this.quantity = product.getQuantity();
+        this.category = product.getCategory().getCategory();
+    }
 }

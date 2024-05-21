@@ -13,9 +13,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -37,17 +34,17 @@ public class FastfoodSystemApplication {
 	}
 
 	private void preloadData(RoleService roleService, UserService userService, ProductService productService, CategoryService categoryService, PasswordEncoder encoder) {
-//		List<Role> roles = roleService.getAllRoles();
-//
-//		List<User> users = FileUtil.getObjectsFromFile("preloadData/user.json", User[].class);
-//		if(users != null){
-//			users = users.stream().peek(user -> user.setPassword(encoder.encode(user.getPassword()))).toList();
-//
-//		}
-//		for (User user : users) {
-//			user.setRoles(new HashSet<>(roles));
-//
-//		}
+		List<Role> roles = roleService.getAllRoles();
+
+		List<User> users = FileUtil.getObjectsFromFile("preloadData/user.json", User[].class);
+		if(users != null){
+			users = users.stream().peek(user -> user.setPassword(encoder.encode(user.getPassword()))).toList();
+
+		}
+		for (User user : users) {
+			user.setRoles(new HashSet<>(roles));
+
+		}
 		List<Product> products = FileUtil.getObjectsFromFile("preloadData/product.json", Product[].class);
 		List<Category> categories = FileUtil.getObjectsFromFile("preloadData/category.json", Category[].class);
 
@@ -56,8 +53,8 @@ public class FastfoodSystemApplication {
 		}
 
 
-		//List<User> persistedUsers = userService.addAllUsers(users);
-		//List<Category> persistedCategories = categoryService.addAllCategories(categories);
+		List<User> persistedUsers = userService.addAllUsers(users);
+		List<Category> persistedCategories = categoryService.addAllCategories(categories);
 		List<Product> persistedProducts = productService.addAllProducts(products);
 
 
