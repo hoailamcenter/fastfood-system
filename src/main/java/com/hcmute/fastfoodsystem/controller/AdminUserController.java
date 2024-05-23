@@ -37,7 +37,7 @@ public class AdminUserController {
         } catch (Exception e) {
             model.addAttribute("errorMessage", "An error occurred while deleting the user.");
         }
-        return "redirect:/admin/user";
+        return "redirect:/admin/users";
     }
 
     @PostMapping("/updateUser")
@@ -46,7 +46,6 @@ public class AdminUserController {
             User userToUpdate = userService.getUserByIdOrElseThrow(userDto.getId(), "User not found with id: " + userDto.getId());
             userToUpdate.setFirstName(userDto.getFirstName());
             userToUpdate.setLastName(userDto.getLastName());
-            userToUpdate.setEmail(userDto.getEmail());
             userToUpdate.setPhoneNumber(userDto.getPhoneNumber());
             userToUpdate.setAddress(userDto.getAddress());
             userService.updateUser(userToUpdate);
@@ -54,6 +53,6 @@ public class AdminUserController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "An error occurred while updating the user");
         }
-        return "redirect:/admin/user";
+        return "redirect:/admin/users";
     }
 }

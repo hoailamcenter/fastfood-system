@@ -60,9 +60,54 @@
                                 <td class="total-pr" style="color: black">
                                     <span>[(${order.paymentMethod})]</span>
                                 </td>
+                                <td style="color: black">
+                                    <button type="button" class="detail-button" data-bs-toggle="modal" data-backdrop="static" th:attr="data-bs-target='#orderDetailsModal' + ${order.orderId}">Detail</button>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:each="order : ${orders}">
+        <div class="modal fade" th:id="'orderDetailsModal' + ${order.orderId}" tabindex="-1" role="dialog" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="orderDetailsModalLabel">Order Details</h5>
+                    </div>
+                    <div class="modal-body">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Image</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="detail : ${order.orderDetails}">
+                                <td th:text="${detail.product.productName}"></td>
+                                <td>
+                                    <img th:src="@{${detail.product.image}}" width="100" height="100" alt="Product Image">
+                                </td>
+                                <td th:text="${detail.quantity}"></td>
+                                <td th:text="${'$'+detail.price}"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><strong>TOTAL</strong></td>
+                                <td th:text="${#aggregates.sum(order.orderDetails.![quantity])}"></td>
+                                <td th:text="${'$'+order.totalAmount}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -83,5 +128,32 @@
 <!-- JavaScript Libraries -->
 <div th:replace="~{fragment::script}">
 </div>
+<script>
+    document.querySelectorAll('[data-bs-toggle="modal"]').forEach(function(button) {
+        var target = button.getAttribute('data-bs-target');
+        var modal = new bootstrap.Modal(document.querySelector(target), {
+            backdrop: false // Disable the backdrop
+        });
+
+        button.addEventListener('click', function() {
+            modal.show();
+        });
+    });
+
+    document.querySelectorAll('.modal').forEach(function(modal) {
+        modal.addEventListener('click', function(event) {
+            // If the target of the click event is the modal itself (not a child element of the modal)
+            if (event.target === modal) {
+                // Hide the modal
+                modal.style.display = 'none';
+            }
+        });
+    });
+    document.querySelectorAll('.modal').forEach(function(modal) {
+        modal.addEventListener('hidden.bs.modal', function () {
+            document.querySelector('.modal-backdrop').remove();
+        });
+    });
+</script>
 </body>
 </html>

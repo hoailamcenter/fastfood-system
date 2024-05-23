@@ -81,41 +81,30 @@ public class ProductServiceImpl implements ProductService {
     }
     @Override
     public Product addProduct(ProductDto productDto) {
-        // 1. Retrieve Category (and handle potential errors)
         Category category = categoryRepository.findByCategory(productDto.getCategory());
-
-        // 2. Convert DTO to Product (and associate category)
         Product product = new Product();
         product.setProductName(productDto.getProductName());
         product.setPrice(productDto.getPrice());
         product.setQuantity(productDto.getQuantity());
         product.setImage(productDto.getImage());
-        product.setCategory(category); // Set the retrieved category
-
-        // 3. Save Product to Database
+        product.setCategory(category);
         return productRepository.save(product);
     }
 
     @Override
     public void updateProduct(Product existingProduct, ProductDto productDto) {
-        // 1. Retrieve Category (and handle potential errors)
         Category category = categoryRepository.findByCategory(productDto.getCategory());
         if (category == null) {
             throw new EntityNotFoundException("Category not found: " + productDto.getCategory());
         }
-
-        // 2. Update Existing Product Fields
         existingProduct.setProductName(productDto.getProductName());
         existingProduct.setPrice(productDto.getPrice());
         existingProduct.setQuantity(productDto.getQuantity());
-        // Only update image if a new one is provided
         if (!productDto.getImage().isEmpty()) {
             existingProduct.setImage(productDto.getImage());
         }
         existingProduct.setCategory(category);
-
-        // 3. Save Updated Product
-        productRepository.save(existingProduct); // This will perform an update operation
+        productRepository.save(existingProduct);
     }
     @Override
     public ProductDto getById(long id) {

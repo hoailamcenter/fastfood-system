@@ -31,14 +31,6 @@ public class AdminProductController {
     private CategoryService categoryService;
     @Value("${file.upload-dir}")
     private String uploadDir;
-    @GetMapping("/dashboard")
-    public String dashboard() {
-        return "admin/dashboard";
-    }
-    @GetMapping("/login")
-    public String login() {
-        return "admin/login";
-    }
     @GetMapping("/list-products")
     public String getProducts(Model model) {
         List<Product> products = productService.getAllProduct();

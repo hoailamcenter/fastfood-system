@@ -39,7 +39,6 @@ public class FastfoodSystemApplication {
 		List<User> users = FileUtil.getObjectsFromFile("preloadData/user.json", User[].class);
 		if(users != null){
 			users = users.stream().peek(user -> user.setPassword(encoder.encode(user.getPassword()))).toList();
-
 		}
 		for (User user : users) {
 			user.setRoles(new HashSet<>(roles));
@@ -51,13 +50,9 @@ public class FastfoodSystemApplication {
 		for (int i = 0; i < products.size(); i++){
 			categories.get(i % categories.size()).addProduct(products.get(i));
 		}
-
-
 		List<User> persistedUsers = userService.addAllUsers(users);
 		List<Category> persistedCategories = categoryService.addAllCategories(categories);
 		List<Product> persistedProducts = productService.addAllProducts(products);
-
-
 	}
 
 }

@@ -39,12 +39,10 @@ public class CartController {
         User user = userService.getUserByEmail(username);
         Cart cart = user.getCart();
         if (cart == null) {
+            cart = new Cart();
             model.addAttribute("check");
-
         }
-        if (cart != null) {
-            model.addAttribute("grandTotal", cart.getTotalPrice());
-        }
+        model.addAttribute("grandTotal", cart.getTotalPrice());
         model.addAttribute("shoppingCart", cart);
         model.addAttribute("title", "Cart");
         session.setAttribute("totalItems", cart.getTotalItems());

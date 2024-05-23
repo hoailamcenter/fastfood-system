@@ -1,13 +1,8 @@
 package com.hcmute.fastfoodsystem.dto;
 
-import com.hcmute.fastfoodsystem.model.Cart;
-import com.hcmute.fastfoodsystem.model.CartItems;
-import com.hcmute.fastfoodsystem.model.Product;
-import com.hcmute.fastfoodsystem.model.User;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
 
-import java.util.List;
+import com.hcmute.fastfoodsystem.model.User;
+import lombok.*;
 import java.util.Set;
 
 @Getter
