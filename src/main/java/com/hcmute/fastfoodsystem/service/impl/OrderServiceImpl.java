@@ -5,11 +5,13 @@ import com.hcmute.fastfoodsystem.model.*;
 import com.hcmute.fastfoodsystem.repository.*;
 import com.hcmute.fastfoodsystem.service.CartService;
 import com.hcmute.fastfoodsystem.service.OrderService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -66,11 +68,18 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
+    @Transactional
     public Order acceptOrder(Long id) {
-        Order order = orderRepository.getById(id);
-        order.setAccept(true);
-        order.setDeliveryDate(new Date());
-        return orderRepository.save(order);
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        if (optionalOrder.isPresent()) {
+            Order order = optionalOrder.get();
+            order.setAccept(true);
+            order.setOrderStatus("Delivery");
+            order.setDeliveryDate(new Date());
+            return orderRepository.save(order);
+        } else {
+            throw new EntityNotFoundException("Order with id " + id + " not found");
+        }
     }
 
     @Override
